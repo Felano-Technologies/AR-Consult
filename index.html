@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AR Consult | Academic & Research Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="./images/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      .animate-fade-in-up {
+            animation: fadeInUp 1s ease-out both;
+        }
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+               opacity: 1;
+               transform: translateY(0);
+            }
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #e6f4ea;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #15803d;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #166534;
+        }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-800">
+    <!-- Navbar -->
+    <nav id="navbar" class="bg-transparent text-white fixed top-0 left-0 right-0 z-50 transition duration-300 ease-in-out">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                <img src="./images/logo.png" alt="AR Consult Logo" class="h-10 w-10 rounded-full shadow" />
+                <span class="text-xl font-bold">AR CONSULT</span>
+                </div>
+        
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-6 items-center">
+                <a href="#home" class="hover:text-white/80 transition">Home</a>
+                <a href="#about" class="hover:text-white/80 transition">About</a>
+                <a href="#services" class="hover:text-white/80 transition">Services</a>
+                <a href="#reviews" class="hover:text-white/80 transition">Reviews</a>
+                <a href="#contact" class="hover:text-white/80 transition">Contact</a>
+                <a href="#contact" class="bg-white text-green-700 px-4 py-2 rounded hover:bg-gray-200 transition">Contact Us</a>
+                </div>
+        
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                <button id="mobile-menu-btn" class="focus:outline-none text-white">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="md:hidden hidden bg-green-600 shadow-md px-4 pb-4 space-y-2">
+        <a href="#home" class="block py-2 border-b border-white/10">Home</a>
+        <a href="#about" class="block py-2 border-b border-white/10">About</a>
+        <a href="#services" class="block py-2 border-b border-white/10">Services</a>
+        <a href="#reviews" class="block py-2 border-b border-white/10">Reviews</a>
+        <a href="#contact" class="block py-2 border-b border-white/10">Contact</a>
+        <a href="#contact" class="block py-2 text-center bg-white text-green-700 rounded">Contact Us</a>
+        </div>
+    </nav>
+    
+  
+    <!-- Hero Section (with background image) -->
+    <section id="hero" class="relative h-screen overflow-hidden">
+        <!-- Carousel -->
+        <div id="carousel" class="absolute inset-0 z-0 transition-all duration-[2000ms] ease-in-out bg-cover bg-center"></div>
+      
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black bg-opacity-60 z-10"></div>
+      
+        <!-- Content -->
+        <div class="relative z-20 flex flex-col items-center justify-center text-white h-full px-4 text-center">
+          <h1 class="text-4xl md:text-6xl font-bold mb-4">Academic Excellence <br class="hidden md:block"> Guided by Experts</h1>
+          <p class="text-lg md:text-xl mb-8 text-gray-200">
+            Personalized research support, application help, and consulting for students and professionals.
+          </p>
+          <a href="#contact" class="inline-block bg-green-600 px-6 py-3 rounded-lg text-white font-semibold hover:bg-green-700 transition">Get Started</a>
+        </div>
+    </section>
+      
+
+  
+    <!-- About Section -->
+    <section id="about" class="bg-white py-20">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-10 animate-fade-in-up">
+        
+        <!-- Image -->
+        <div class="md:w-1/2">
+            <img src="./images/book.jpg" alt="AR Consult in action" class="rounded-xl shadow-lg" />
+        </div>
+    
+        <!-- Text Content -->
+        <div class="md:w-1/2 space-y-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800">
+            Who We Are
+            </h2>
+            <p class="text-gray-600 text-lg">
+            At <span class="text-green-600 font-semibold">AR Consult</span>, we specialize in guiding students and professionals toward academic and research excellence. Whether you're working on your MSc, MPhil, or PhD, we’re here to support you every step of the way.
+            </p>
+            <ul class="space-y-2 text-gray-700">
+            <li class="flex items-center"><span class="text-green-500 text-xl mr-2">✔️</span> Full Thesis Writing & Editing Support</li>
+            <li class="flex items-center"><span class="text-green-500 text-xl mr-2">✔️</span> Journal & Conference Publication Assistance</li>
+            <li class="flex items-center"><span class="text-green-500 text-xl mr-2">✔️</span> Market & Academic Research Services</li>
+            <li class="flex items-center"><span class="text-green-500 text-xl mr-2">✔️</span> Personalized Statement of Purpose Guidance</li>
+            </ul>
+            <a href="#services" class="inline-block mt-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow hover:bg-green-700 transition">
+            Explore Our Services
+            </a>
+        </div>
+    
+        </div>
+    </section>
+  
+
+    <!-- Services Section -->
+    <section id="services" class="bg-green-50 py-20">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+        <h2 class="text-4xl font-bold text-gray-800 mb-4 animate-fade-in-up">Our Services</h2>
+        <p class="text-gray-600 mb-10 text-lg animate-fade-in-up delay-200">
+            We provide expert academic support tailored to your goals. Here’s how we can help you succeed:
+        </p>
+    
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 animate-fade-in-up delay-300">
+            
+            <!-- Service Card 1 -->
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
+            <div class="flex items-center justify-center w-12 h-12 bg-green-600 text-white text-xl font-bold rounded-full mx-auto mb-4">1</div>
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Thesis Assistance</h3>
+            <p class="text-gray-600 text-sm">
+                Full support with MSc, MPhil, and PhD theses — from proposal to final defense.
+            </p>
+            </div>
+    
+            <!-- Service Card 2 -->
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
+            <div class="flex items-center justify-center w-12 h-12 bg-green-600 text-white text-xl font-bold rounded-full mx-auto mb-4">2</div>
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Publication Assistance</h3>
+            <p class="text-gray-600 text-sm">
+                Help with publishing in reputable journals, conferences, and academic outlets.
+            </p>
+            </div>
+    
+            <!-- Service Card 3 -->
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
+            <div class="flex items-center justify-center w-12 h-12 bg-green-600 text-white text-xl font-bold rounded-full mx-auto mb-4">3</div>
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Market Research</h3>
+            <p class="text-gray-600 text-sm">
+                We assist in both academic and commercial market analysis using modern tools and data.
+            </p>
+            </div>
+    
+            <!-- Service Card 4 -->
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
+            <div class="flex items-center justify-center w-12 h-12 bg-green-600 text-white text-xl font-bold rounded-full mx-auto mb-4">4</div>
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Statement of Purpose</h3>
+            <p class="text-gray-600 text-sm">
+                We craft compelling SOPs to enhance your admission and scholarship success.
+            </p>
+            </div>
+    
+        </div>
+    
+        <!-- Call to Action -->
+        <div class="mt-12">
+            <a href="#contact" class="bg-green-600 text-white px-8 py-3 rounded-lg shadow hover:bg-green-700 transition">
+            Get Started Today
+            </a>
+        </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="why" class="bg-white py-20">
+        <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center text-gray-800 mb-12 animate-fade-in-up">
+            Why Choose Us?
+        </h2>
+    
+        <div class="grid md:grid-cols-2 gap-10 animate-fade-in-up delay-200">
+    
+            <!-- Left Icon List -->
+            <div class="space-y-6">
+            <div class="flex items-start space-x-4">
+                <i class="fas fa-user-graduate text-green-600 text-3xl mt-1"></i>
+                <div>
+                <h4 class="text-xl font-semibold text-gray-800">Expert Academic Consultants</h4>
+                <p class="text-gray-600 text-sm">Our team includes PhD holders, researchers, and certified lecturers.</p>
+                </div>
+            </div>
+    
+            <div class="flex items-start space-x-4">
+                <i class="fas fa-globe text-green-600 text-3xl mt-1"></i>
+                <div>
+                <h4 class="text-xl font-semibold text-gray-800">Global Reach</h4>
+                <p class="text-gray-600 text-sm">We support students from across Africa, the UK, Canada, and the US.</p>
+                </div>
+            </div>
+    
+            <div class="flex items-start space-x-4">
+                <i class="fas fa-certificate text-green-600 text-3xl mt-1"></i>
+                <div>
+                <h4 class="text-xl font-semibold text-gray-800">Track Record of Excellence</h4>
+                <p class="text-gray-600 text-sm">Over 30+ scholarships and 100s of successful research defenses supported.</p>
+                </div>
+            </div>
+            </div>
+    
+            <!-- Right Side Image or Illustration (optional) -->
+            <div class="flex justify-center items-center">
+            <img src="./images/text.png" alt="Why Choose Us" class="max-w-full h-auto" />
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats" class="bg-white py-20">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+        <h2 class="text-4xl font-bold text-gray-800 mb-10 animate-fade-in-up">Our Impact in Numbers</h2>
+    
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 animate-fade-in-up delay-200">
+            
+            <!-- Stat 1 -->
+            <div class="space-y-2">
+            <h3 class="text-5xl font-extrabold text-green-600 counter" data-count="25">0</h3>
+            <p class="text-gray-700 font-medium">Programs Completed</p>
+            </div>
+    
+            <!-- Stat 2 -->
+            <div class="space-y-2">
+            <h3 class="text-5xl font-extrabold text-green-600 counter" data-count="15">0</h3>
+            <p class="text-gray-700 font-medium">Certified Tutors</p>
+            </div>
+    
+            <!-- Stat 3 -->
+            <div class="space-y-2">
+            <h3 class="text-5xl font-extrabold text-green-600 counter" data-count="30">0+</h3>
+            <p class="text-gray-700 font-medium">Scholarships Won</p>
+            </div>
+    
+        </div>
+        </div>
+    </section>
+  
+
+
+    <!-- Latest News Section -->
+    <section id="news" class="bg-gray-100 py-20">
+        <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center text-gray-800 mb-12 animate-fade-in-up">Latest News</h2>
+    
+        <div class="grid md:grid-cols-3 gap-10 animate-fade-in-up delay-200">
+    
+            <!-- News Card 1 -->
+            <div class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+            <div class="p-6 space-y-4">
+                <p class="text-green-600 text-sm font-semibold">April 10, 2025</p>
+                <h3 class="text-xl font-bold text-gray-800">New Scholarship Partnerships Announced</h3>
+                <p class="text-gray-600 text-sm">
+                We’ve partnered with top institutions to provide scholarship opportunities for African students.
+                </p>
+                <a href="#" class="text-green-600 font-semibold hover:underline">Read more →</a>
+            </div>
+            </div>
+    
+            <!-- News Card 2 -->
+            <div class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+            <div class="p-6 space-y-4">
+                <p class="text-green-600 text-sm font-semibold">March 28, 2025</p>
+                <h3 class="text-xl font-bold text-gray-800">Research Bootcamp Launched</h3>
+                <p class="text-gray-600 text-sm">
+                Our virtual research training program is now live — guiding students from proposal to defense.
+                </p>
+                <a href="#" class="text-green-600 font-semibold hover:underline">Learn more →</a>
+            </div>
+            </div>
+    
+            <!-- News Card 3 -->
+            <div class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+            <div class="p-6 space-y-4">
+                <p class="text-green-600 text-sm font-semibold">February 18, 2025</p>
+                <h3 class="text-xl font-bold text-gray-800">Meet Our New Experts</h3>
+                <p class="text-gray-600 text-sm">
+                We’ve expanded our academic team with certified supervisors and international mentors.
+                </p>
+                <a href="#" class="text-green-600 font-semibold hover:underline">Discover more →</a>
+            </div>
+            </div>
+    
+        </div>
+        </div>
+    </section>
+    
+    
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="bg-white py-20">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+        <h2 class="text-4xl font-bold text-gray-800 mb-4 animate-fade-in-up">What Our Clients Say</h2>
+        <p class="text-gray-600 mb-10 text-lg animate-fade-in-up delay-200">
+            Hear from students and professionals we've helped on their academic journey.
+        </p>
+    
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in-up delay-300">
+            
+            <!-- Review Card 1 -->
+            <div class="bg-green-50 rounded-xl shadow p-6 hover:shadow-lg transition">
+            <div class="flex items-center space-x-4 mb-4">
+                <img src="https://i.pravatar.cc/100?img=3" alt="Client photo" class="w-12 h-12 rounded-full object-cover" />
+                <div class="text-left">
+                <h4 class="font-semibold text-gray-800">Kwame O.</h4>
+                <p class="text-sm text-gray-500">PhD Candidate</p>
+                </div>
+            </div>
+            <p class="text-gray-700 text-sm italic">
+                “AR Consult helped me publish my research and finish my thesis. Their support was a game changer.”
+            </p>
+            </div>
+    
+            <!-- Review Card 2 -->
+            <div class="bg-green-50 rounded-xl shadow p-6 hover:shadow-lg transition">
+            <div class="flex items-center space-x-4 mb-4">
+                <img src="https://i.pravatar.cc/100?img=5" alt="Client photo" class="w-12 h-12 rounded-full object-cover" />
+                <div class="text-left">
+                <h4 class="font-semibold text-gray-800">Ama B.</h4>
+                <p class="text-sm text-gray-500">MPhil Student</p>
+                </div>
+            </div>
+            <p class="text-gray-700 text-sm italic">
+                “Their SOP writing service got me admitted with a scholarship! Highly recommend.”
+            </p>
+            </div>
+    
+            <!-- Review Card 3 -->
+            <div class="bg-green-50 rounded-xl shadow p-6 hover:shadow-lg transition">
+            <div class="flex items-center space-x-4 mb-4">
+                <img src="https://i.pravatar.cc/100?img=10" alt="Client photo" class="w-12 h-12 rounded-full object-cover" />
+                <div class="text-left">
+                <h4 class="font-semibold text-gray-800">Yaw D.</h4>
+                <p class="text-sm text-gray-500">MBA Graduate</p>
+                </div>
+            </div>
+            <p class="text-gray-700 text-sm italic">
+                “They made my market research easy and professional. I’ll definitely come back.”
+            </p>
+            </div>
+    
+        </div>
+        </div>
+    </section>
+
+
+    <!-- FAQ Section -->
+    <section id="faq" class="bg-gray-50 py-20">
+        <div class="max-w-5xl mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">Frequently Asked Questions</h2>
+        
+        <div class="space-y-6">
+    
+            <!-- FAQ 1 -->
+            <div>
+            <h4 class="text-xl font-semibold text-green-600">How do I get started?</h4>
+            <p class="text-gray-700 mt-2">You can contact us directly through the form or WhatsApp. We’ll schedule a free intro call.</p>
+            </div>
+    
+            <!-- FAQ 2 -->
+            <div>
+            <h4 class="text-xl font-semibold text-green-600">What academic areas do you support?</h4>
+            <p class="text-gray-700 mt-2">We support thesis/dissertations, proposal writing, research mentorship, and publication prep.</p>
+            </div>
+    
+            <!-- FAQ 3 -->
+            <div>
+            <h4 class="text-xl font-semibold text-green-600">Are your services available internationally?</h4>
+            <p class="text-gray-700 mt-2">Yes — we work with clients in Nigeria, Ghana, South Africa, the UK, Canada, and the U.S.</p>
+            </div>
+    
+        </div>
+        </div>
+    </section>
+  
+  
+
+    <!-- Contact Section -->
+    <section id="contact" class="bg-green-50 py-20">
+        <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center text-gray-800 mb-6 animate-fade-in-up">Get in Touch</h2>
+        <p class="text-center text-gray-600 mb-12 text-lg animate-fade-in-up delay-200">
+            Have questions or need support? Reach out and let’s take the next step together.
+        </p>
+    
+        <div class="grid md:grid-cols-2 gap-10 animate-fade-in-up delay-300">
+            
+            <!-- Contact Form -->
+            <form class="bg-white p-8 rounded-xl shadow space-y-6">
+            <input type="text" placeholder="Full Name" class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-500" required>
+            <input type="email" placeholder="Email Address" class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-500" required>
+            <textarea rows="5" placeholder="Your Message" class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-500" required></textarea>
+            <button type="submit" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow hover:bg-green-700 transition w-full">
+                Send Message
+            </button>
+            </form>
+    
+            <!-- Contact Info + Map -->
+            <div class="space-y-6">
+            <div class="bg-white p-6 rounded-xl shadow text-gray-700 space-y-4">
+                <div>
+                <h4 class="font-semibold text-lg">Email</h4>
+                <p>info@arconsult.com</p>
+                </div>
+                <div>
+                <h4 class="font-semibold text-lg">Phone</h4>
+                <p>+233 50 123 4567</p>
+                </div>
+                <div>
+                <h4 class="font-semibold text-lg">Location</h4>
+                <p>Accra, Ghana</p>
+                </div>
+                <a href="https://wa.me/233501234567" target="_blank" class="inline-block bg-green-600 text-white px-5 py-3 rounded-lg hover:bg-green-700 transition">
+                📱 Message us on WhatsApp
+                </a>
+            </div>
+    
+            <!-- Google Map -->
+            <div class="overflow-hidden rounded-xl shadow-lg">
+                <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1983.8531569056684!2d-0.18696468426827646!3d5.603716495945968!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf9b437a2b4d6f%3A0x832ae11c9398483f!2sAccra%2C%20Ghana!5e0!3m2!1sen!2sgh!4v1617776608931!5m2!1sen!2sgh"
+                width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+            </div>
+    
+        </div>
+        </div>
+    </section>
+
+    <!-- CTA Strip -->
+    <section class="bg-green-600 py-12">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">Ready to start your journey with us?</h2>
+        <p class="text-white text-lg mb-6">Get personalized academic consulting and expert guidance from our team today.</p>
+        <a href="#contact" class="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+            Contact Us Now
+        </a>
+        </div>
+    </section>
+  
+  
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+        
+        <!-- Brand Info -->
+        <div>
+            <h3 class="text-2xl font-bold text-green-500 mb-4">AR Consult</h3>
+            <p class="text-gray-300 text-sm">
+            Empowering your academic journey through personalized research support and expert consulting services.
+            </p>
+        </div>
+    
+        <!-- Quick Links -->
+        <div>
+            <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+            <ul class="space-y-2 text-gray-300 text-sm">
+            <li><a href="#hero" class="hover:text-green-400 transition">Home</a></li>
+            <li><a href="#about" class="hover:text-green-400 transition">About</a></li>
+            <li><a href="#services" class="hover:text-green-400 transition">Services</a></li>
+            <li><a href="#reviews" class="hover:text-green-400 transition">Reviews</a></li>
+            <li><a href="#contact" class="hover:text-green-400 transition">Contact</a></li>
+            </ul>
+        </div>
+    
+        <!-- Contact or Social (Optional) -->
+        <div>
+            <h4 class="text-lg font-semibold mb-4">Connect</h4>
+            <p class="text-gray-300 text-sm mb-2">info@arconsult.com</p>
+            <p class="text-gray-300 text-sm mb-4">+233 50 123 4567</p>
+    
+            <div class="flex space-x-4">
+            <a href="#" class="text-gray-300 hover:text-green-400 transition">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="text-gray-300 hover:text-green-400 transition">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="#" class="text-gray-300 hover:text-green-400 transition">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            </div>
+        </div>
+    
+        </div>
+    
+        <!-- Bottom -->
+        <div class="border-t border-gray-700 mt-12 pt-6 text-center text-sm text-gray-500">
+        &copy; 2025 AR Consult. All rights reserved.
+        </div>
+    </footer>
+  
+  </body>
+
+
+  <script>
+
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const counters = document.querySelectorAll('.counter');
+    let activated = false;
+    const nav = document.getElementById("navbar");
+    const carousel = document.getElementById("carousel");
+    const images = [
+        "./images/1.jpg",
+        "./images/4.jpg",
+        "./images/5.jpg",
+        "./images/7.jpg"
+    ];
+    let index = 0;
+
+  function switchImage() {
+    carousel.style.backgroundImage = `url('${images[index]}')`;
+    index = (index + 1) % images.length;
+  }
+
+  // Initial image and auto-switch every 5 seconds
+  switchImage();
+  setInterval(switchImage, 5000);
+
+    window.addEventListener("scroll", () => {
+    if (window.scrollY > 10) {
+        nav.classList.add("bg-green-700", "shadow-md");
+    } else {
+        nav.classList.remove("bg-green-700", "shadow-md");
+    }
+    });
+
+    mobileMenuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+    });
+  
+    function animateCounters() {
+      if (activated) return;
+      if (window.scrollY + window.innerHeight > document.getElementById('stats').offsetTop + 100) {
+        counters.forEach(counter => {
+          const updateCount = () => {
+            const target = +counter.getAttribute('data-count');
+            const current = +counter.innerText;
+            const increment = Math.ceil(target / 40);
+  
+            if (current < target) {
+              counter.innerText = current + increment;
+              setTimeout(updateCount, 40);
+            } else {
+              counter.innerText = target;
+            }
+          };
+          updateCount();
+        });
+        activated = true;
+      }
+    }
+  
+    window.addEventListener('scroll', animateCounters);
+  </script>
+  
+</html>
