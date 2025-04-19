@@ -28,6 +28,18 @@
                transform: translateY(0);
             }
         }
+        @keyframes wiggle {
+          0%, 100% { transform: rotate(0deg); }
+          25% { transform: rotate(5deg); }
+          50% { transform: rotate(-5deg); }
+          75% { transform: rotate(3deg); }
+        }
+        
+        .wiggle-on-hover:hover {
+          animation: wiggle 0.5s ease-in-out;
+        }
+
+        
         @keyframes bounceTrail {
             0%   { transform: translateX(0); }
             30%  { transform: translateX(6px); }
@@ -279,7 +291,7 @@
     
             <!-- Stat 3 -->
             <div class="space-y-2">
-            <h3 class="text-5xl font-extrabold text-green-600 counter" data-count="30">0+</h3>
+            <h3 class="text-5xl font-extrabold text-green-600 counter" data-count="100">0</h3>
             <p class="text-gray-700 font-medium">Scholarships Won</p>
             </div>
     
@@ -449,14 +461,38 @@
             <!-- Contact Info + Map -->
             <div class="space-y-6">
             <div class="bg-white p-6 rounded-xl shadow text-gray-700 space-y-4">
+              
+              <div>
+                <h4 class="font-semibold text-lg mb-1">Email</h4>
+                <a 
+                  href="mailto:scholar.arconsult@gmail.com?subject=Inquiry%20from%20AR%20Consult%20Website" 
+                  class="group flex items-center text-black-400 hover:underline transition relative"
+                >
+                  <!-- Icon with animation on hover -->
+                  <span class="mr-2 inline-block wiggle-on-hover">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current" viewBox="0 0 24 24">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v1l-10 6L2 7V6c0-1.1.9-2 2-2zm0 4.25l8 4.75 8-4.75V18c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V8.25z"/>
+                    </svg>
+                  </span>
+                  scholar.arconsult@gmail.com
+                </a>
+              </div>
+              
+              
+
                 <div>
-                <h4 class="font-semibold text-lg">Email</h4>
-                <p>scholar.arconsult@gmail.com</p>
+                  <h4 class="font-semibold text-lg mb-1">Phone</h4>
+                  <a href="tel:+233200707044" class="group flex items-center text-black-400 hover:underline transition">
+                    <!-- Phone Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 transition-transform group-hover:rotate-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h2l3.6 7.59a1 1 0 00.91.41h8.18a1 1 0 00.91-.41L21 5H3z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 13a4 4 0 01-8 0" />
+                    </svg>
+                    +233 20 070 7044
+                  </a>
                 </div>
-                <div>
-                <h4 class="font-semibold text-lg">Phone</h4>
-                <p>+233 20 070 7044</p>
-                </div>
+                
+                
                 <div>
                 <h4 class="font-semibold text-lg">Location</h4>
                 <p>Ayeduase, KNUST</p>
