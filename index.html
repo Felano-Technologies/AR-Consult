@@ -680,8 +680,10 @@
     window.addEventListener("scroll", () => {
     if (window.scrollY > 10) {
         nav.classList.add("bg-green-700", "shadow-md");
+        nav.classList.remove("bg-transparent");
     } else {
         nav.classList.remove("bg-green-700", "shadow-md");
+        nav.classList.add("bg-transparent");
     }
     });
 
