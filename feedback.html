@@ -303,117 +303,112 @@
 
 
             <script>
-                      // Dynamic Star Rating
-      let selectedRating = 0;
-      const starContainer = document.getElementById('starRating');
-      for (let i = 1; i <= 5; i++) {
-        const star = document.createElement('span');
-        star.innerHTML = '★';
-        star.dataset.value = i;
-        star.classList.add('text-gray-300');
-        star.addEventListener('click', () => {
-          selectedRating = i;
-          Array.from(starContainer.children).forEach((s, idx) => {
-            s.classList.toggle('text-yellow-400', idx < i);
-            s.classList.toggle('text-gray-300', idx >= i);
-          });
-        });
-        starContainer.appendChild(star);
-      }
-      
+                      
+// Dynamic Star Rating
+let selectedRating = 0;
+const starContainer = document.getElementById('starRating');
+for (let i = 1; i <= 5; i++) {
+  const star = document.createElement('span');
+  star.innerHTML = '★';
+  star.dataset.value = i;
+  star.classList.add('text-gray-300');
+  star.addEventListener('click', () => {
+    selectedRating = i;
+    Array.from(starContainer.children).forEach((s, idx) => {
+      s.classList.toggle('text-yellow-400', idx < i);
+      s.classList.toggle('text-gray-300', idx >= i);
+    });
+  });
+  starContainer.appendChild(star);
+}
 
-      // Handle form submission
-        document.getElementById('reviewForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-         const name = document.getElementById('name').value.trim();
-            const comment = document.getElementById('comment').value.trim();
-      
-        if (!selectedRating) {
-          alert('Please select a rating.');
-          return;
-        }
-          // Save review to Firestore
-        db.collection('reviews').add({
-            name: name,
-            comment: comment,
-            rating: selectedRating,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        })
-        .then(() => {
-            alert('Review submitted successfully! 🎉');
-            // Reset form
-            this.reset();
-            selectedRating = 0;
-            Array.from(starContainer.children).forEach(s => s.classList.add('text-gray-300'));
-            // Reload reviews
-            loadReviews();
-        })
-        .catch((error) => {
-            console.error("Error adding review: ", error);
-            alert('Failed to submit review. Try again.');
-        });
-        });
-        function loadReviews() {
-            const reviewsList = document.getElementById('reviewsList');
-            reviewsList.innerHTML = '<h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">What Our Clients Say</h3>'; // reset
-          
-            db.collection('reviews').orderBy('timestamp', 'desc').get()
-              .then(snapshot => {
-                snapshot.forEach(doc => {
-                  const review = doc.data();
-                  const reviewHTML = `
-                    <div class="bg-white p-6 rounded shadow mb-6 animate-fade-in-up delay-200">
-                      <div class="flex items-center mb-2">
-                        <h4 class="font-semibold text-gray-800 mr-2">${review.name}</h4>
-                        <div class="flex text-yellow-400">
-                          ${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}
-                        </div>
-                      </div>
-                      <p class="text-gray-600">${review.comment}</p>
-                    </div>
-                  `;
-                  reviewsList.innerHTML += reviewHTML;
-                });
-              })
-              .catch(error => {
-                console.error('Error fetching reviews: ', error);
-              });
-          }
-          
-          // Load reviews when page loads
-          document.addEventListener('DOMContentLoaded', loadReviews);
-          
-            
-            const reviewHTML = `
-         <div class="bg-white p-6 rounded shadow mb-6 animate-fade-in-up delay-200">
-           <div class="flex items-center mb-2">
-              <h4 class="font-semibold text-gray-800 mr-2">${name}</h4>
+// Handle form submission
+document.getElementById('reviewForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const name = document.getElementById('name').value.trim();
+  const comment = document.getElementById('comment').value.trim();
+
+  if (!selectedRating) {
+    alert('Please select a rating.');
+    return;
+  }
+
+  // Save review to Firestore
+  db.collection('reviews').add({
+    name: name,
+    comment: comment,
+    rating: selectedRating,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+  })
+  .then(() => {
+    console.log('Review submitted successfully!');
+
+    // Reset form
+    this.reset();
+    selectedRating = 0;
+    Array.from(starContainer.children).forEach(s => s.classList.add('text-gray-300'));
+
+    // Reload all reviews
+    loadReviews();
+
+    // Show success message properly
+    const successMessage = document.getElementById('successMessage');
+    successMessage.classList.add('hidden', 'opacity-0', '-translate-y-5');
+
+    setTimeout(() => {
+      successMessage.classList.remove('hidden');
+      setTimeout(() => {
+        successMessage.classList.remove('opacity-0', '-translate-y-5');
+      }, 10);
+    }, 10);
+
+    successMessage.scrollIntoView({ behavior: 'smooth' });
+
+    // Hide success message after 5 seconds
+    setTimeout(() => {
+      successMessage.classList.add('opacity-0', '-translate-y-5');
+      setTimeout(() => successMessage.classList.add('hidden'), 500);
+    }, 5000);
+  })
+  .catch((error) => {
+    console.error("Error adding review: ", error);
+    alert('Failed to submit review. Try again.');
+  });
+});
+
+// Load and Display all Reviews
+function loadReviews() {
+  const reviewsList = document.getElementById('reviewsList');
+  reviewsList.innerHTML = '<h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">What Our Clients Say</h3>';
+
+  db.collection('reviews').orderBy('timestamp', 'desc').get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        const review = doc.data();
+        const reviewHTML = `
+          <div class="bg-white p-6 rounded shadow mb-6 animate-fade-in-up delay-200">
+            <div class="flex items-center mb-2">
+              <h4 class="font-semibold text-gray-800 mr-2">${review.name}</h4>
               <div class="flex text-yellow-400">
-                ${'★'.repeat(selectedRating)}${'☆'.repeat(5 - selectedRating)}
+                ${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}
               </div>
             </div>
-            <p class="text-gray-600">${comment}</p>
+            <p class="text-gray-600">${review.comment}</p>
           </div>
         `;
-      
-            document.getElementById('reviewsList').innerHTML += reviewHTML;
-      
+        reviewsList.innerHTML += reviewHTML;
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching reviews: ', error);
+    });
+}
 
-         // Show success message
-        successMessage.classList.remove('hidden');
-        setTimeout(() => {
-        successMessage.classList.remove('opacity-0', '-translate-y-5');
-        }, 10); // Small timeout to allow CSS transition
+// Load reviews on page load
+document.addEventListener('DOMContentLoaded', loadReviews);
+);
 
-        successMessage.scrollIntoView({ behavior: 'smooth' });
-
-        // Hide success message after 5 seconds
-        setTimeout(() => {
-        successMessage.classList.add('opacity-0', '-translate-y-5');
-        setTimeout(() => successMessage.classList.add('hidden'), 500); // Hide after animation
-        }, 5000);
-      
 
                 document.addEventListener("DOMContentLoaded", () => {
                     const mobileMenuBtn = document.getElementById("mobile-menu-btn");
