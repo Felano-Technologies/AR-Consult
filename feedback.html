@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AR Consult | Feedback</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="./images/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+    html {
+        scroll-behavior: smooth;
+      }
+      .animate-fade-in-up {
+            animation: fadeInUp 1s ease-out both;
+        }
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+               opacity: 1;
+               transform: translateY(0);
+            }
+        }
+        @keyframes wiggle {
+          0%, 100% { transform: rotate(0deg); }
+          25% { transform: rotate(5deg); }
+          50% { transform: rotate(-5deg); }
+          75% { transform: rotate(3deg); }
+        }
+        
+        .wiggle-on-hover:hover {
+          animation: wiggle 0.5s ease-in-out;
+        }
+
+        
+        @keyframes bounceTrail {
+            0%   { transform: translateX(0); }
+            30%  { transform: translateX(6px); }
+            50%  { transform: translateX(3px); }
+            70%  { transform: translateX(6px); }
+            100% { transform: translateX(0); }
+          }
+          
+          .bounce-trail {
+            animation: bounceTrail 0.5s ease-in-out forwards;
+          }
+          
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #e6f4ea;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #15803d;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #166534;
+        }
+</style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navbar -->
+    <nav id="navbar" class="bg-transparent text-white fixed top-0 left-0 right-0 z-50 transition duration-300 ease-in-out">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                <img src="./images/logo.png" alt="AR Consult Logo" class="h-10 w-10 rounded-full shadow" />
+                <span class="text-xl font-bold">AR CONSULT</span>
+                </div>
+        
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-6 items-center">
+                <a href="index.html#home" class="hover:text-white/80 transition">Home</a>
+                <a href="index.html#about" class="hover:text-white/80 transition">About</a>
+                <a href="index.html#services" class="hover:text-white/80 transition">Services</a>
+                <a href="pricing.html" class="hover:text-white/80 transition">Pricing</a>
+                <a href="index.html#reviews" class="hover:text-white/80 transition">Reviews</a>
+
+                <a href="index.html#contact" class="bg-white text-green-700 px-4 py-2 rounded hover:bg-gray-200 transition">Contact Us</a>
+                </div>
+        
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="focus:outline-none text-white" title="Toggle Menu button">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2"
+                        viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="md:hidden hidden bg-green-600 shadow-md px-4 pb-4 space-y-2">
+        <a href="index.html#home" class="block py-2 border-b border-white/10">Home</a>
+        <a href="index.html#about" class="block py-2 border-b border-white/10">About</a>
+        <a href="index.html#services" class="block py-2 border-b border-white/10">Services</a>
+        <a href="pricing.html" class="block py-2 border-b border-white/10">Pricing</a>
+        <a href="index.html#reviews" class="block py-2 border-b border-white/10">Reviews</a>
+        <a href="index.html#contact" class="block py-2 text-center bg-white text-green-700 rounded">Contact Us</a>
+        </div>
+    </nav>
+
+    <section id="feedback" class="py-16 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4">
+          <h2 class="text-3xl font-extrabold text-gray-800 mb-8 text-center">Client Feedback</h2>
+
+              <!-- Success Message (Hidden initially) -->
+              <div id="successMessage" class="hidden mb-6 transition-all duration-500 ease-out transform -translate-y-5 opacity-0 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">Thank you!</strong>
+                <span class="block sm:inline">Your feedback has been submitted successfully.</span>
+              </div>
+      
+          <form id="reviewForm" class="bg-white rounded-lg shadow-md p-6 animate-fade-in-up delay-200">
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-semibold text-gray-700">Name</label>
+              <input type="text" id="name" required class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-600">
+            </div>
+      
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-semibold text-gray-700">Your Comment</label>
+              <textarea id="comment" required class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-600" rows="4"></textarea>
+            </div>
+      
+            <div class="mb-6">
+              <label class="block mb-2 text-sm font-semibold text-gray-700">Rating</label>
+              <div id="starRating" class="flex space-x-2 text-2xl text-yellow-400 cursor-pointer">
+                <!-- Stars will be injected by JavaScript -->
+              </div>
+            </div>
+      
+            <button type="submit" class="w-full bg-green-700 text-white py-3 rounded hover:bg-green-800 transition">
+              Submit Feedback
+            </button>
+          </form>
+      
+          <div id="reviewsList" class="mt-12">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">What Our Clients Say</h3>
+            <!-- Reviews will appear here -->
+          </div>
+        </div>
+      </section>
+
+                  <!-- Footer -->
+                  <footer class="bg-black text-white py-12">
+                    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+                    
+                    <!-- Brand Info -->
+                    <div>
+                        <h3 class="text-2xl font-bold text-green-500 mb-4">AR Consult</h3>
+                        <p class="text-gray-300 text-sm">
+                        Empowering your academic journey through personalized research support and expert consulting services.
+                        </p>
+                    </div>
+                
+            <!-- Quick Links -->
+            <div>
+                <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                <ul class="space-y-2 text-gray-300 text-sm">
+                  <li>
+                    <a href="index.html#hero" class="group flex items-center hover:text-green-400 hover:underline transition">
+                      <span class="mr-2 inline-block transform transition-transform group-hover:translate-x-1 group-hover:scale-x-125">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current" viewBox="0 0 24 24">
+                          <path d="M13 5l7 7-7 7M5 12h14" />
+                        </svg>
+                      </span>
+                      Home
+                    </a>
+                  </li>
+                  <li>
+                    <a href="index.html#about" class="group flex items-center hover:text-green-400 hover:underline transition">
+                      <span class="mr-2 inline-block transform transition-transform group-hover:translate-x-1 group-hover:scale-x-125">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current" viewBox="0 0 24 24">
+                          <path d="M13 5l7 7-7 7M5 12h14" />
+                        </svg>
+                      </span>
+                      About
+                    </a>
+                  </li>
+                  <li>
+                    <a href="index.html#services" class="group flex items-center hover:text-green-400 hover:underline transition">
+                      <span class="mr-2 inline-block transform transition-transform group-hover:translate-x-1 group-hover:scale-x-125">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current" viewBox="0 0 24 24">
+                          <path d="M13 5l7 7-7 7M5 12h14" />
+                        </svg>
+                      </span>
+                      Services
+                    </a>
+                  </li>
+                  <li>
+                    <a href="pricing.html" class="group flex items-center hover:text-green-400 hover:underline transition">
+                      <span class="mr-2 inline-block transform transition-transform group-hover:translate-x-1 group-hover:scale-x-125">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current" viewBox="0 0 24 24">
+                          <path d="M13 5l7 7-7 7M5 12h14" />
+                        </svg>
+                      </span>
+                      Pricing
+                    </a>
+                  </li>
+                  <li>
+                    <a href="index.html#reviews" class="group flex items-center hover:text-green-400 hover:underline transition">
+                      <span class="mr-2 inline-block transform transition-transform group-hover:translate-x-1 group-hover:scale-x-125">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current" viewBox="0 0 24 24">
+                          <path d="M13 5l7 7-7 7M5 12h14" />
+                        </svg>
+                      </span>
+                      Reviews
+                    </a>
+                  </li>
+                  <li>
+                    <a href="index.html#contact" class="group flex items-center hover:text-green-400 hover:underline transition">
+                      <span class="mr-2 inline-block transform transition-transform group-hover:translate-x-1 group-hover:scale-x-125">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current" viewBox="0 0 24 24">
+                          <path d="M13 5l7 7-7 7M5 12h14" />
+                        </svg>
+                      </span>
+                      Contact
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              
+                
+                    <!-- Contact or Social (Optional) -->
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Connect With Us</h4>
+                        <div>
+                          <h4 class="font-semibold text-lg mb-1">Email</h4>
+                          <p>
+                            <a href="mailto:arconsult1@gmail.com" class="text-green-400 hover:underline transition">
+                              arconsult1@gmail.com
+                            </a>
+                          </p>
+                        </div>
+                        <div>
+                          
+                          <h4 class="font-semibold text-lg">Phone</h4>
+                          <p>
+                            <a href="tel:+233200707044" class="text-green-400 hover:underline">
+                              +233 20 070 7044
+                            </a>
+                          </p>
+                        </div>
+                            
+                        <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-blue-400 transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-blue-400 transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-green-400 transition">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        </div>
+                    </div>
+                
+                    </div>
+                
+                    <!-- Bottom -->
+                    <div class="border-t border-gray-700 mt-12 pt-6 text-center text-sm text-gray-500">
+                    &copy; 2025 AR Consult®. All rights reserved.
+                    </div>
+                </footer>
+            
+            </body>
+
+
+            <script>
+                      // Dynamic Star Rating
+      let selectedRating = 0;
+      const starContainer = document.getElementById('starRating');
+      for (let i = 1; i <= 5; i++) {
+        const star = document.createElement('span');
+        star.innerHTML = '★';
+        star.dataset.value = i;
+        star.classList.add('text-gray-300');
+        star.addEventListener('click', () => {
+          selectedRating = i;
+          Array.from(starContainer.children).forEach((s, idx) => {
+            s.classList.toggle('text-yellow-400', idx < i);
+            s.classList.toggle('text-gray-300', idx >= i);
+          });
+        });
+        starContainer.appendChild(star);
+      }
+      
+
+      // Handle form submission
+        document.getElementById('reviewForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+         const name = document.getElementById('name').value.trim();
+            const comment = document.getElementById('comment').value.trim();
+      
+        if (!selectedRating) {
+          alert('Please select a rating.');
+          return;
+        }
+      
+            const reviewHTML = `
+         <div class="bg-white p-6 rounded shadow mb-6 animate-fade-in-up delay-200">
+           <div class="flex items-center mb-2">
+              <h4 class="font-semibold text-gray-800 mr-2">${name}</h4>
+              <div class="flex text-yellow-400">
+                ${'★'.repeat(selectedRating)}${'☆'.repeat(5 - selectedRating)}
+              </div>
+            </div>
+            <p class="text-gray-600">${comment}</p>
+          </div>
+        `;
+      
+            document.getElementById('reviewsList').innerHTML += reviewHTML;
+      
+
+         // Show success message
+        successMessage.classList.remove('hidden');
+        setTimeout(() => {
+        successMessage.classList.remove('opacity-0', '-translate-y-5');
+        }, 10); // Small timeout to allow CSS transition
+
+        successMessage.scrollIntoView({ behavior: 'smooth' });
+
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+        successMessage.classList.add('opacity-0', '-translate-y-5');
+        setTimeout(() => successMessage.classList.add('hidden'), 500); // Hide after animation
+        }, 5000);
+      
+        // Reset form
+            this.reset();
+            selectedRating = 0;
+            Array.from(starContainer.children).forEach(s => s.classList.add('text-gray-300'));
+            });
+                document.addEventListener("DOMContentLoaded", () => {
+                    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+                    const mobileMenu = document.getElementById("mobile-menu");
+                    const nav = document.getElementById("navbar");
+                    const counters = document.querySelectorAll('.counter');
+                    let activated = false;
+                
+                    window.addEventListener("scroll", () => {
+                        if (window.scrollY > 10) {
+                          nav.classList.add("bg-green-700", "shadow-md");
+                          nav.classList.remove("bg-transparent");
+                        } else {
+                          nav.classList.remove("bg-green-700", "shadow-md");
+                          nav.classList.add("bg-transparent");
+                        }
+                      });
+                      
+                  
+                    mobileMenuBtn.addEventListener("click", () => {
+                      mobileMenu.classList.toggle("hidden");
+                    });
+                  
+                    function animateCounters() {
+                      if (activated) return;
+                      const stats = document.getElementById('stats');
+                      if (stats && window.scrollY + window.innerHeight > stats.offsetTop + 100) {
+                        counters.forEach(counter => {
+                          const updateCount = () => {
+                            const target = +counter.getAttribute('data-count');
+                            const current = +counter.innerText;
+                            const increment = Math.ceil(target / 40);
+                  
+                            if (current < target) {
+                              counter.innerText = current + increment;
+                              setTimeout(updateCount, 40);
+                            } else {
+                              counter.innerText = target;
+                            }
+                          };
+                          updateCount();
+                        });
+                        activated = true;
+                      }
+                    }
+                  
+                    window.addEventListener('scroll', animateCounters);
+                  });
+                  
+            </script>
+            </html>
+            <!-- End of HTML Document -->
+            <!-- This HTML document contains a feedback form and a list of client reviews. The form allows users to submit their name, comment, and rating. The reviews are displayed below the form. The page also includes a responsive navigation bar and a footer with contact information. The design is styled using Tailwind CSS and includes animations for elements like the navbar and review submission. The JavaScript handles the dynamic star rating and form submission functionality. -->
+
+      
