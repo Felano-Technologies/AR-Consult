@@ -71,6 +71,22 @@
         }
     </style>
   </head>
+  <!-- Firebase SDK (add in <head>) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDN3nPbqlvDlFqPWYHZ4Djpu0POnFQ35pA",
+    authDomain: "arconsultwebsite.firebaseapp.com",
+    projectId: "arconsultwebsite",
+    storageBucket: "arconsultwebsite.appspot.com",
+    messagingSenderId: "780844296566",
+    appId: "1:780844296566:web:1bfb7f1e0cae13b2e87257"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+</script>
+
   <body class="bg-gray-50 text-gray-800">
     <!-- Navbar -->
     <nav id="navbar" class="bg-transparent text-white fixed top-0 left-0 right-0 z-50 transition duration-300 ease-in-out">
@@ -84,7 +100,7 @@
         
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-6 items-center">
-                <a href="#home" class="hover:text-white/80 transition">Home</a>
+                <a href="#hero" class="hover:text-white/80 transition">Home</a>
                 <a href="#about" class="hover:text-white/80 transition">About</a>
                 <a href="#services" class="hover:text-white/80 transition">Services</a>
                 <a href="pricing.html" class="hover:text-white/80 transition">Pricing</a>
@@ -126,7 +142,10 @@
       
         <!-- Content -->
         <div class="relative z-20 flex flex-col items-center justify-center text-white h-full px-4 text-center">
-          <h1 class="text-4xl md:text-6xl font-bold mb-4">Academic Excellence <br class="hidden md:block"> Guided by Experts</h1>
+          <h1 class="text-4xl md:text-6xl font-bold mb-4 italic"
+          style = "font-family: Georgia, serif;"
+          >Academic Excellence <br class="hidden md:block"> Guided by Experts
+        </h1>
           <p class="text-lg md:text-xl mb-8 text-gray-200">
             Personalized research support, application help, and consulting for students and professionals.
           </p>
@@ -147,7 +166,8 @@
     
         <!-- Text Content -->
         <div class="md:w-1/2 space-y-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-800">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 italic"
+            style="font-family: Georgia, serif;">
             Who We Are
             </h2>
             <p class="text-gray-600 text-lg">
@@ -171,7 +191,12 @@
     <!-- Services Section -->
     <section id="services" class="bg-green-50 py-20">
         <div class="max-w-7xl mx-auto px-6 text-center">
-        <h2 class="text-4xl font-bold text-gray-800 mb-4 animate-fade-in-up">Our Services</h2>
+        <h2 
+        class="text-4xl font-bold text-gray-800 mb-4 animate-fade-in-up italic"
+        style="font-family: Georgia, serif;"
+        >Our Services
+      </h2>
+
         <p class="text-gray-600 mb-10 text-lg animate-fade-in-up delay-200">
             We provide expert academic support tailored to your goals. Here’s how we can help you succeed:
         </p>
@@ -228,7 +253,8 @@
     <!-- Why Choose Us Section -->
     <section id="why" class="bg-white py-20">
         <div class="max-w-7xl mx-auto px-6">
-        <h2 class="text-4xl font-bold text-center text-gray-800 mb-12 animate-fade-in-up">
+        <h2 class="text-4xl font-bold text-center text-gray-800 mb-12 animate-fade-in-up"
+        style="font-family: Georgia, serif;">
             Why Choose Us?
         </h2>
     
@@ -256,7 +282,7 @@
                 <i class="fas fa-certificate text-green-600 text-3xl mt-1"></i>
                 <div>
                 <h4 class="text-xl font-semibold text-gray-800">Track Record of Excellence</h4>
-                <p class="text-gray-600 text-sm">Over 30+ scholarships and 100s of successful research defenses supported.</p>
+                <p class="text-gray-600 text-sm">Over 100+ scholarships and 100s of successful research defenses supported.</p>
                 </div>
             </div>
             </div>
@@ -272,27 +298,41 @@
     <!-- Stats Section -->
     <section id="stats" class="bg-white py-20">
         <div class="max-w-6xl mx-auto px-6 text-center">
-        <h2 class="text-4xl font-bold text-gray-800 mb-10 animate-fade-in-up">Our Impact in Numbers</h2>
+          <h2
+          class="text-4xl font-bold text-gray-800 mb-10 animate-fade-in-up italic"
+          style="font-family: Georgia, serif;"
+        >
+          Our Impact in Numbers
+        </h2>
+        
     
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 animate-fade-in-up delay-200">
             
             <!-- Stat 1 -->
             <div class="space-y-2">
-            <h3 class="text-5xl font-extrabold text-green-600 counter" data-count="25">0</h3>
-            <p class="text-gray-700 font-medium">Programs Completed</p>
+            <h3 class="text-5xl font-extrabold text-green-600">
+              <span class ="counter" data-count="650">0</span>+
+            </h3>
+            <p class="text-gray-700 font-medium">Thesis Completed</p>
             </div>
     
             <!-- Stat 2 -->
             <div class="space-y-2">
-            <h3 class="text-5xl font-extrabold text-green-600 counter" data-count="15">0</h3>
-            <p class="text-gray-700 font-medium">Certified Tutors</p>
+              <h3 class="text-5xl font-extrabold text-green-600">
+                <span class="counter" data-count="300">0</span>+
+              </h3>
+              <p class="text-gray-700 font-medium">Turnitin Proofreading</p>
             </div>
+            
     
             <!-- Stat 3 -->
             <div class="space-y-2">
-            <h3 class="text-5xl font-extrabold text-green-600 counter" data-count="100">0</h3>
-            <p class="text-gray-700 font-medium">Scholarships Won</p>
+              <h3 class="text-5xl font-extrabold text-green-600">
+                $<span class="counter" data-count="500">0</span>k+
+              </h3>
+              <p class="text-gray-700 font-medium">Scholarships Won</p>
             </div>
+            
     
         </div>
         </div>
@@ -349,65 +389,23 @@
     
     
 
-    <!-- Reviews Section -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-    body {
-      font-family: 'Poppins', Georgia;
-    }
-    </style>
-    
-    <section id="reviews" class="bg-white py-20">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-        <h2 class="text-4xl font-bold text-gray-800 mb-4 animate-fade-in-up">What Our Clients Say</h2>
-        <p class="text-gray-600 mb-10 text-lg animate-fade-in-up delay-200">
-            Hear from students and professionals we've helped on their academic journey.
-        </p>
-    
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in-up delay-300">
-            
-            <!-- Review Card 1 -->
-            <div class="bg-green-50 rounded-xl shadow p-6 hover:shadow-lg transition">
-            <div class="flex items-center space-x-4 mb-4">
-                <img src="https://i.pravatar.cc/100?img=3" alt="Client photo" class="w-12 h-12 rounded-full object-cover" />
-                <div class="text-left">
-                <h4 class="font-semibold text-gray-800">Kwame O.</h4>
-                <p class="text-sm text-gray-500">PhD Candidate</p>
-                </div>
-            </div>
-            <p class="text-gray-700 text-sm italic">
-                “AR Consult helped me publish my research and finish my thesis. Their support was a game changer.”
-            </p>
-            </div>
-    
-            <!-- Review Card 2 -->
-            <div class="bg-green-50 rounded-xl shadow p-6 hover:shadow-lg transition">
-            <div class="flex items-center space-x-4 mb-4">
-                <img src="https://i.pravatar.cc/100?img=5" alt="Client photo" class="w-12 h-12 rounded-full object-cover" />
-                <div class="text-left">
-                <h4 class="font-semibold text-gray-800">Ama B.</h4>
-                <p class="text-sm text-gray-500">MPhil Student</p>
-                </div>
-            </div>
-            <p class="text-gray-700 text-sm italic">
-                “Their SOP writing service got me admitted with a scholarship! Highly recommend.”
-            </p>
-            </div>
-    
-            <!-- Review Card 3 -->
-            <div class="bg-green-50 rounded-xl shadow p-6 hover:shadow-lg transition">
-            <div class="flex items-center space-x-4 mb-4">
-                <img src="https://i.pravatar.cc/100?img=10" alt="Client photo" class="w-12 h-12 rounded-full object-cover" />
-                <div class="text-left">
-                <h4 class="font-semibold text-gray-800">Yaw D.</h4>
-                <p class="text-sm text-gray-500">MBA Graduate</p>
-                </div>
-            </div>
-            <p class="text-gray-700 text-sm italic">
-                “They made my market research easy and professional. I’ll definitely come back.”
-            </p>
-            </div>
-        </div>
+<!-- Reviews Section -->
+<section id="reviews" class="bg-white py-20">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <h2 class="text-4xl font-bold text-gray-800 mb-4 animate-fade-in-up georgia-italic">
+      What Our Clients Say
+    </h2>
+    <p class="text-gray-600 mb-10 text-lg animate-fade-in-up delay-200">
+      Hear from students and professionals we've helped on their academic journey.
+    </p>
+
+    <!-- THIS is now dynamic -->
+    <div id="reviewsContainer" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in-up delay-300">
+      <!-- JS will inject cards here -->
+    </div>
+  </div>
+</section>
+
 
                 <!-- Beautiful Centered Leave a Review Button -->
                 <div class="w-full flex justify-center mt-20">
@@ -727,6 +725,53 @@
     }
   
     window.addEventListener('scroll', animateCounters);
+
+      // helper to get initials from full name
+  function getInitials(name) {
+    return name
+      .split(' ')
+      .map(part => part[0])
+      .join('')
+      .slice(0,2)
+      .toUpperCase();
+  }
+
+  // build and inject each review card
+  function loadReviews() {
+    const container = document.getElementById('reviewsContainer');
+    container.innerHTML = ''; // clear old
+
+    db.collection('reviews')
+      .orderBy('timestamp', 'desc')
+      .limit(6) // show up to 6
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          const { name, comment, rating } = doc.data();
+          const initials = getInitials(name);
+          const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+
+          const card = `
+            <div class="bg-green-50 rounded-xl shadow p-6 hover:shadow-lg transition">
+              <div class="flex items-center space-x-4 mb-4">
+                <div class="w-12 h-12 rounded-full bg-green-200 text-green-700 flex items-center justify-center font-bold uppercase">
+                  ${initials}
+                </div>
+                <div class="text-left">
+                  <h4 class="font-semibold text-gray-800">${name}</h4>
+                  <p class="text-sm text-gray-500">${stars}</p>
+                </div>
+              </div>
+              <p class="text-gray-700 text-sm italic">“${comment}”</p>
+            </div>
+          `;
+          container.insertAdjacentHTML('beforeend', card);
+        });
+      })
+      .catch(err => console.error('Error loading reviews:', err));
+  }
+
+  document.addEventListener('DOMContentLoaded', loadReviews);
   </script>
   
 </html>
