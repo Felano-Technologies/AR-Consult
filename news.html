@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AR Consult – News</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind Typography for nice prose styling -->
+  <script>
+    tailwind.config = {
+      plugins: [require('@tailwindcss/typography')],
+    }
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <div class="max-w-3xl mx-auto py-16 px-4 space-y-16">
+
+    <!-- Back link -->
+    <a href="index.html#news" class="inline-block text-green-600 hover:underline mb-8">
+      ← Back to home
+    </a>
+
+    <!-- Article 1 -->
+    <section id="scholarship-partnerships" class="prose lg:prose-xl">
+      <h1>New Scholarship Partnerships Announced</h1>
+      <p class="text-green-600 text-sm font-semibold">April 10, 2025</p>
+      <p>
+        We’re thrilled to announce formal partnerships with three leading universities across Ghana, Kenya, and Nigeria.
+        These agreements will fund over 200 full scholarships for African students pursuing postgraduate research in STEM fields.
+      </p>
+    </section>
+
+    <!-- Article 2 -->
+    <section id="research-bootcamp" class="prose lg:prose-xl">
+      <h1>Research Bootcamp Launched</h1>
+      <p class="text-green-600 text-sm font-semibold">March 28, 2025</p>
+      <p>
+        Our first-ever virtual Research Bootcamp kicked off this month—equipping undergraduate and master’s students with hands-on
+        training in methodology, data analysis, and academic writing. Over 150 participants joined live workshops led by PhD experts.
+      </p>
+    </section>
+
+    <!-- Article 3 -->
+    <section id="meet-new-experts" class="prose lg:prose-xl">
+      <h1>Meet Our New Experts</h1>
+      <p class="text-green-600 text-sm font-semibold">February 18, 2025</p>
+      <p>
+        AR Consult has onboarded five international mentors from top-ranked universities worldwide. They bring expertise in
+        qualitative research, grant writing, and publication strategies to support your academic journey.
+      </p>
+    </section>
+
+    <!-- Article 4 -->
+    <section id="annual-impact-report" class="prose lg:prose-xl">
+      <h1>2024 Annual Impact Report Published</h1>
+      <p class="text-green-600 text-sm font-semibold">January 12, 2025</p>
+      <p>
+        Our 2024 report is out! Highlights include over 3,000 hours of one-on-one consulting delivered,
+        a 95% satisfaction rate, and success stories from students who secured PhD funding through our guidance.
+      </p>
+    </section>
+
+    <!-- Article 5 -->
+    <section id="summer-workshop" class="prose lg:prose-xl">
+      <h1>Virtual Summer Research Workshop</h1>
+      <p class="text-green-600 text-sm font-semibold">June 5, 2024</p>
+      <p>
+        Returning for its second year, our Summer Research Workshop offers interactive sessions on literature reviews,
+        statistical software tutorials, and publishing ethics. Early-bird registration opens May 1st.
+      </p>
+    </section>
+
+    <!-- Article 6 -->
+    <section id="award-wins" class="prose lg:prose-xl">
+      <h1>AR Consult Wins Education Award</h1>
+      <p class="text-green-600 text-sm font-semibold">December 20, 2024</p>
+      <p>
+        We’re honored to receive the “Innovative EdTech Provider” award at the African Education Summit.
+        This recognizes our mobile-first learning platform and personalized mentorship model.
+      </p>
+    </section>
+
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const target = window.location.hash.substring(1); // e.g. "research-bootcamp"
+      if (target) {
+        // Hide every section with an id that doesn't match
+        document.querySelectorAll('section[id]').forEach(sec => {
+          if (sec.id !== target) sec.style.display = 'none';
+        });
+        // Scroll the chosen one into view (just in case)
+        const el = document.getElementById(target);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+    </script>
+    
+
+</body>
+</html>

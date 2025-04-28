@@ -338,84 +338,104 @@
         </div>
     </section>
   
+  
 
-
-    <!-- Latest News Section -->
-    <section id="news" class="bg-gray-100 py-20">
-        <div class="max-w-7xl mx-auto px-6">
-        <h2 class="text-4xl font-bold text-center text-gray-800 mb-12 animate-fade-in-up">Latest News</h2>
-    
-        <div class="grid md:grid-cols-3 gap-10 animate-fade-in-up delay-200">
-    
-            <!-- News Card 1 -->
-            <div class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
-            <div class="p-6 space-y-4">
-                <p class="text-green-600 text-sm font-semibold">April 10, 2025</p>
-                <h3 class="text-xl font-bold text-gray-800">New Scholarship Partnerships Announced</h3>
-                <p class="text-gray-600 text-sm">
-                We’ve partnered with top institutions to provide scholarship opportunities for African students.
-                </p>
-                <a href="news.html" class="text-green-600 font-semibold hover:underline">Read more →</a>
-            </div>
-            </div>
-    
-            <!-- News Card 2 -->
-            <div class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
-            <div class="p-6 space-y-4">
-                <p class="text-green-600 text-sm font-semibold">March 28, 2025</p>
-                <h3 class="text-xl font-bold text-gray-800">Research Bootcamp Launched</h3>
-                <p class="text-gray-600 text-sm">
-                Our virtual research training program is now live — guiding students from proposal to defense.
-                </p>
-                <a href="news.html" class="text-green-600 font-semibold hover:underline">Learn more →</a>
-            </div>
-            </div>
-    
-            <!-- News Card 3 -->
-            <div class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
-            <div class="p-6 space-y-4">
-                <p class="text-green-600 text-sm font-semibold">February 18, 2025</p>
-                <h3 class="text-xl font-bold text-gray-800">Meet Our New Experts</h3>
-                <p class="text-gray-600 text-sm">
-                We’ve expanded our academic team with certified supervisors and international mentors.
-                </p>
-                <a href="news.html" class="text-green-600 font-semibold hover:underline">Discover more →</a>
-            </div>
-            </div>
-    
-        </div>
-        </div>
-    </section>
-    
-    
-
-<!-- Reviews Section -->
-<section id="reviews" class="bg-white py-20">
-  <div class="max-w-7xl mx-auto px-6 text-center">
-    <h2 class="text-4xl font-bold text-gray-800 mb-4 animate-fade-in-up georgia-italic">
-      What Our Clients Say
+<!-- Latest News Section -->
+<section id="news" class="bg-gray-100 py-20">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="text-4xl font-bold text-center text-gray-800 mb-12 animate-fade-in-up">
+      Latest News
     </h2>
-    <p class="text-gray-600 mb-10 text-lg animate-fade-in-up delay-200">
-      Hear from students and professionals we've helped on their academic journey.
-    </p>
 
-    <!-- THIS is now dynamic -->
-    <div id="reviewsContainer" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in-up delay-300">
-      <!-- JS will inject cards here -->
+    <div id="newsContainer" class="grid md:grid-cols-3 gap-10 animate-fade-in-up delay-200"></div>
+
+    <!-- centered link, two “spaces” below the cards -->
+    <div class="mt-8 flex justify-center animate-fade-in-up delay-300">
+      <a
+        href="news.html"
+        class="text-4xl font-bold text-gray-800 hover:text-green-600 hover:underline transition"
+      >
+        Access All News →
+      </a>
     </div>
   </div>
 </section>
 
 
-                <!-- Beautiful Centered Leave a Review Button -->
-                <div class="w-full flex justify-center mt-20">
-                  <a href="feedback.html" 
-                    class="bg-gradient-to-r from-green-600 to-green-700 text-white font-bold text-lg px-5 py-2 rounded-full shadow-md hover:shadow-lg hover:scale-105 transform transition-all duration-300 ease-in-out"
-                    style="font-family: Georgia, serif;">
-                    Leave a Review ✍️
-                  </a>
-                </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('newsContainer');
+
+      fetch('news.html')
+        .then(res => {
+          if (!res.ok) throw new Error('Network response was not OK');
+          return res.text();
+        })
+        .then(htmlString => {
+          const doc = new DOMParser().parseFromString(htmlString, 'text/html');
+          // grab only the first 3 <section id="..."> blocks
+          const articles = Array.from(doc.querySelectorAll('section[id]')).slice(0, 3);
+
+          articles.forEach(sec => {
+            const id    = sec.id;
+            const date  = sec.querySelector('p.text-green-600')?.textContent.trim() || '';
+            const title = sec.querySelector('h1')?.textContent.trim()           || '';
+            const link  = `news.html#${id}`;
+
+            // build and append the card
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden';
+            card.innerHTML = `
+              <div class="p-6 space-y-4">
+                <p class="text-green-600 text-sm font-semibold">${date}</p>
+                <h3 class="text-xl font-bold text-gray-800">${title}</h3>
+                <a href="${link}" class="text-green-600 font-semibold hover:underline">
+                  Read more →
+                </a>
+              </div>
+            `;
+            container.appendChild(card);
+          });
+        })
+        .catch(err => {
+          console.error('Failed to load news:', err);
+          container.innerHTML = `
+            <div class="col-span-3 text-center text-gray-500">
+              Unable to load news.
+            </div>
+          `;
+        });
+    });
+    </script>    
+    
+
+      <!-- Reviews Section -->
+      <section id="reviews" class="bg-white py-20">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+          <h2 class="text-4xl font-bold text-gray-800 mb-4 animate-fade-in-up georgia-italic">
+            What Our Clients Say
+          </h2>
+          <p class="text-gray-600 mb-10 text-lg animate-fade-in-up delay-200">
+            Hear from students and professionals we've helped on their academic journey.
+          </p>
+
+          <!-- THIS is now dynamic -->
+          <div id="reviewsContainer" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in-up delay-300">
+            <!-- JS will inject cards here -->
+          </div>
         </div>
+      </section>
+
+
+    <!-- Beautiful Centered Leave a Review Button -->
+        <div class="w-full flex justify-center mt-20">
+        <a href="feedback.html" 
+        class="bg-gradient-to-r from-green-600 to-green-700 text-white font-bold text-lg px-5 py-2 rounded-full shadow-md hover:shadow-lg hover:scale-105 transform transition-all duration-300 ease-in-out"
+        style="font-family: Georgia, serif;">
+        Leave a Review ✍️
+        </a>
+        </div>
+      </div>
     </section>
 
 
