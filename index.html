@@ -461,34 +461,38 @@
         <div class="grid md:grid-cols-2 gap-10 animate-fade-in-up delay-300">
             
       <!-- Contact Form Wrapper -->
-      <div class="px-4 sm:px-6 lg:px-8">
-        <form class="bg-white p-6 sm:p-8 rounded-xl shadow space-y-6 max-w-md mx-auto">
-          <input
-            type="text"
-            placeholder="Full Name"
-            class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-            required
-          >
-          <input
-            type="email"
-            placeholder="Email Address"
-            class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-            required
-          >
-          <textarea
-            rows="5"
-            placeholder="Your Message"
-            class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-            required
-          ></textarea>
-          <button
-            type="submit"
-            class="bg-green-600 text-white px-6 py-3 rounded-lg shadow hover:bg-green-700 transition w-full"
-          >
-            Send Message
-          </button>
-        </form>
-      </div>
+<!-- In your index.html (or wherever) -->
+<div class="container mx-auto px-4">
+  <form
+    class="w-full max-w-md bg-white p-4 sm:p-8 rounded-xl shadow space-y-6 mx-auto"
+  >
+    <input
+      type="text"
+      placeholder="Full Name"
+      class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+      required
+    >
+    <input
+      type="email"
+      placeholder="Email Address"
+      class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+      required
+    >
+    <textarea
+      rows="5"
+      placeholder="Your Message"
+      class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+      required
+    ></textarea>
+    <button
+      type="submit"
+      class="w-full bg-green-600 text-white px-6 py-3 rounded-lg shadow hover:bg-green-700 transition"
+    >
+      Send Message
+    </button>
+  </form>
+</div>
+
 
             <!-- Contact Info + Map -->
             <div class="space-y-6">
