@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /404.html
+Disallow: /privacy-policy.html
+Disallow: /terms-and-conditions.html
+
+Sitemap: https://arconsultservices.com/sitemap.xml
