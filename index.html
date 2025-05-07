@@ -111,6 +111,40 @@
           animation: slideReviews 40s linear infinite;
           will-change: transform;
         }
+
+         /*— mobile override: one-by-one sliding —*/
+  @media (max-width: 768px) {
+    /* turn the grid into a horizontal flex row */
+    #reviewsContainer {
+      display: flex !important;
+      flex-wrap: nowrap;
+      animation: none;           /* disable the desktop marquee */
+    }
+    /* hide overflow so cards slide cleanly */
+    #reviewsContainer {
+      overflow: hidden;
+    }
+
+    /* each card slides in/out */
+    @keyframes slideCard {
+      0%   { transform: translateX(100%); opacity: 0; }
+      10%  { transform: translateX(0);   opacity: 1; }
+      30%  { transform: translateX(0);   opacity: 1; }
+      40%  { transform: translateX(-100%); opacity: 0; }
+      100% { transform: translateX(-100%); opacity: 0; }
+    }
+
+    /* apply with staggered delays */
+    .review-card {
+      flex: 0 0 80%;   /* each card takes 80% of viewport width */
+      margin-right: 1rem;
+      animation: slideCard 12s ease-in-out infinite;
+    }
+    .review-card:nth-child(1) { animation-delay: 0s;   }
+    .review-card:nth-child(2) { animation-delay: 4s;   }
+    .review-card:nth-child(3) { animation-delay: 8s;   }
+    /* add more nth-child rules if you inject more cards */
+  }
     </style>
   </head>
   <!-- Firebase SDK (add in <head>) -->
@@ -485,6 +519,8 @@
         class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
       >
         <!-- JS will inject cards here -->
+        const card = document.createElement('div');
+        card.className = 'review-card bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden';        
       </div>
     </div>
 
