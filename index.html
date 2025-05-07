@@ -112,27 +112,50 @@
           will-change: transform;
         }
 
-      /* MOBILE OVERRIDE */
-      @media (max-width: 768px) {
-        #reviewsContainer {
-          display: flex !important;
-          flex-wrap: nowrap;
-          animation: none !important;
+        @media (max-width: 768px) {
+          /* make the wrapper a positioning context */
+          .reviews-wrapper {
+            position: relative;
+            height: auto; /* it will grow to card height */
+          }
+        
+          /* stack all cards on top of each other */
+          #reviewsContainer {
+            display: block !important; /* remove flex/grid on mobile */
+          }
+          .review-card {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+          }
+        
+          /* keyframes for one card sliding in, pausing, sliding out */
+          @keyframes slideCard {
+            0%, 20%   { transform: translateX(100%);  opacity: 0; }
+            25%, 45%  { transform: translateX(0);     opacity: 1; }
+            50%,100%  { transform: translateX(-100%); opacity: 0; }
+          }
+        
+          /* apply with staggered delays */
+          .review-card:nth-child(1) {
+            animation: slideCard 12s ease-in-out infinite;
+            animation-delay: 0s;
+            z-index: 3;
+          }
+          .review-card:nth-child(2) {
+            animation: slideCard 12s ease-in-out infinite;
+            animation-delay: 4s;
+            z-index: 2;
+          }
+          .review-card:nth-child(3) {
+            animation: slideCard 12s ease-in-out infinite;
+            animation-delay: 8s;
+            z-index: 1;
+          }
+          /* if you inject more cards, add more nth-child rules with +4s delays */
         }
-        @keyframes slideCard {
-          0%,20%  { transform: translateX(100%);  opacity: 0; }
-          25%,45% { transform: translateX(0);     opacity: 1; }
-          50%,100%{ transform: translateX(-100%); opacity: 0; }
-        }
-        .review-card {
-          flex: 0 0 80%;
-          margin-right: 1rem;
-          animation: slideCard 12s ease-in-out infinite;
-        }
-        .review-card:nth-child(1) { animation-delay:  0s; }
-        .review-card:nth-child(2) { animation-delay:  4s; }
-        .review-card:nth-child(3) { animation-delay:  8s; }
-      }
     </style>
   </head>
   <!-- Firebase SDK (add in <head>) -->
