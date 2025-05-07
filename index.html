@@ -111,51 +111,6 @@
           animation: slideReviews 40s linear infinite;
           will-change: transform;
         }
-
-        @media (max-width: 768px) {
-          /* make the wrapper a positioning context */
-          .reviews-wrapper {
-            position: relative;
-            height: auto; /* it will grow to card height */
-          }
-        
-          /* stack all cards on top of each other */
-          #reviewsContainer {
-            display: block !important; /* remove flex/grid on mobile */
-          }
-          .review-card {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            opacity: 0;
-          }
-        
-          /* keyframes for one card sliding in, pausing, sliding out */
-          @keyframes slideCard {
-            0%, 20%   { transform: translateX(100%);  opacity: 0; }
-            25%, 45%  { transform: translateX(0);     opacity: 1; }
-            50%,100%  { transform: translateX(-100%); opacity: 0; }
-          }
-        
-          /* apply with staggered delays */
-          .review-card:nth-child(1) {
-            animation: slideCard 12s ease-in-out infinite;
-            animation-delay: 0s;
-            z-index: 3;
-          }
-          .review-card:nth-child(2) {
-            animation: slideCard 12s ease-in-out infinite;
-            animation-delay: 4s;
-            z-index: 2;
-          }
-          .review-card:nth-child(3) {
-            animation: slideCard 12s ease-in-out infinite;
-            animation-delay: 8s;
-            z-index: 1;
-          }
-          /* if you inject more cards, add more nth-child rules with +4s delays */
-        }
     </style>
   </head>
   <!-- Firebase SDK (add in <head>) -->
@@ -513,22 +468,26 @@
  
     
 
-  <!-- Reviews Section -->
-  <section id="reviews" class="bg-white py-20">
-    <div class="max-w-7xl mx-auto px-6 text-center">
-      <h2 class="text-4xl font-bold text-gray-800 mb-4 georgia-italic">
-        What Our Clients Say
-      </h2>
-      <p class="text-gray-600 mb-10 text-lg">
-        Hear from students and professionals we've helped on their academic journey.
-      </p>
+<!-- Reviews Section -->
+<section id="reviews" class="bg-white py-20">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <h2 class="text-4xl font-bold text-gray-800 mb-4 georgia-italic">
+      What Our Clients Say
+    </h2>
+    <p class="text-gray-600 mb-10 text-lg">
+      Hear from students and professionals we've helped on their academic journey.
+    </p>
 
-      <!-- overflow wrapper -->
-      <div class="reviews-wrapper overflow-hidden">
-        <div id="reviewsContainer" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- JS will inject .review-card items here -->
-        </div>
+    <!-- ✨ NEW: overflow wrapper ✨ -->
+    <div class="overflow-hidden">
+      <div
+        id="reviewsContainer"
+        class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+      >
+        <!-- JS will inject cards here -->
       </div>
+    </div>
+
 
 
     <!-- Beautiful Centered Leave a Review Button -->
@@ -852,40 +811,42 @@
       .toUpperCase();
   }
 
-    // Load & animate reviews
-    function loadReviews() {
-      const container = document.getElementById('reviewsContainer');
-      container.innerHTML = '';
-      db.collection('reviews')
-        .orderBy('timestamp','desc')
-        .limit(6)
-        .get()
-        .then(snap => {
-          snap.forEach(doc => {
-            const { name, comment, rating } = doc.data();
-            const initials = getInitials(name);
-            const stars = '★'.repeat(rating)+'☆'.repeat(5-rating);
-            const cardHTML = `
-              <div class="review-card bg-green-50 rounded-xl shadow p-6 hover:shadow-lg transition overflow-hidden">
-                <div class="flex items-center space-x-4 mb-4">
-                  <div class="w-12 h-12 rounded-full bg-green-200 text-green-700 flex items-center justify-center font-bold uppercase">
-                    ${initials}
-                  </div>
-                  <div class="text-left">
-                    <h4 class="font-semibold text-gray-800">${name}</h4>
-                    <p class="text-sm text-gray-500">${stars}</p>
-                  </div>
-                </div>
-                <p class="text-gray-700 text-sm italic">“${comment}”</p>
-              </div>
-            `;
-            container.insertAdjacentHTML('beforeend', cardHTML);
-          });
-        })
-        .catch(console.error);
-    }
+  // build and inject each review card
+  function loadReviews() {
+    const container = document.getElementById('reviewsContainer');
+    container.innerHTML = ''; // clear old
 
-    document.addEventListener('DOMContentLoaded', loadReviews);
+    db.collection('reviews')
+      .orderBy('timestamp', 'desc')
+      .limit(6) // show up to 6
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          const { name, comment, rating } = doc.data();
+          const initials = getInitials(name);
+          const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+
+          const card = `
+            <div class="bg-green-50 rounded-xl shadow p-6 hover:shadow-lg transition">
+              <div class="flex items-center space-x-4 mb-4">
+                <div class="w-12 h-12 rounded-full bg-green-200 text-green-700 flex items-center justify-center font-bold uppercase">
+                  ${initials}
+                </div>
+                <div class="text-left">
+                  <h4 class="font-semibold text-gray-800">${name}</h4>
+                  <p class="text-sm text-gray-500">${stars}</p>
+                </div>
+              </div>
+              <p class="text-gray-700 text-sm italic">“${comment}”</p>
+            </div>
+          `;
+          container.insertAdjacentHTML('beforeend', card);
+        });
+      })
+      .catch(err => console.error('Error loading reviews:', err));
+  }
+
+  document.addEventListener('DOMContentLoaded', loadReviews);
   </script>
   
 </html>
