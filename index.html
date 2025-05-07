@@ -111,6 +111,25 @@
           animation: slideReviews 40s linear infinite;
           will-change: transform;
         }
+
+        /* — MOBILE OVERRIDE: continuous marquee — */
+@media (max-width: 768px) {
+  .reviews-wrapper {
+    overflow: hidden;
+  }
+  #reviewsContainer {
+    display: flex !important;
+    animation: scrollMobile 30s linear infinite !important;
+  }
+  @keyframes scrollMobile {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .review-card {
+    flex: 0 0 auto;
+    margin-right: 1rem;
+  }
+}
     </style>
   </head>
   <!-- Firebase SDK (add in <head>) -->
@@ -478,13 +497,11 @@
       Hear from students and professionals we've helped on their academic journey.
     </p>
 
-    <!-- ✨ NEW: overflow wrapper ✨ -->
-    <div class="overflow-hidden">
-      <div
-        id="reviewsContainer"
-        class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-      >
-        <!-- JS will inject cards here -->
+
+    <!-- ★ marquee wrapper ★ -->
+    <div class="reviews-wrapper">
+      <div id="reviewsContainer" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- JS injects .review-card items here -->
       </div>
     </div>
 
@@ -815,19 +832,20 @@
   function loadReviews() {
     const container = document.getElementById('reviewsContainer');
     container.innerHTML = ''; // clear old
-
+  
     db.collection('reviews')
       .orderBy('timestamp', 'desc')
-      .limit(6) // show up to 6
+      .limit(6)
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {
+          // build your card html exactly as you have it, making sure each has class="review-card"
           const { name, comment, rating } = doc.data();
           const initials = getInitials(name);
           const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
-
-          const card = `
-            <div class="bg-green-50 rounded-xl shadow p-6 hover:shadow-lg transition">
+  
+          const cardHTML = `
+            <div class="review-card bg-green-50 rounded-xl shadow p-6 hover:shadow-lg transition">
               <div class="flex items-center space-x-4 mb-4">
                 <div class="w-12 h-12 rounded-full bg-green-200 text-green-700 flex items-center justify-center font-bold uppercase">
                   ${initials}
@@ -840,12 +858,14 @@
               <p class="text-gray-700 text-sm italic">“${comment}”</p>
             </div>
           `;
-          container.insertAdjacentHTML('beforeend', card);
+          container.insertAdjacentHTML('beforeend', cardHTML);
         });
+        // **now clone all cards** for seamless loop
+        container.innerHTML += container.innerHTML;
       })
       .catch(err => console.error('Error loading reviews:', err));
   }
-
+  
   document.addEventListener('DOMContentLoaded', loadReviews);
   </script>
   
