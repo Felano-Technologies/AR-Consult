@@ -101,16 +101,6 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #166534;
         }
-        @keyframes slideReviews {
-          0%   { transform: translateX(100%); }
-          100% { transform: translateX(-100%); }
-        }
-      
-        #reviewsContainer {
-          /* keep your grid layout, then animate it */
-          animation: slideReviews 40s linear infinite;
-          will-change: transform;
-        }
     </style>
   </head>
   <!-- Firebase SDK (add in <head>) -->
@@ -382,7 +372,7 @@
   
   
 
-<!-- Latest News Section
+<!-- Latest News Section -->
 <section id="news" class="bg-gray-100 py-20">
   <div class="max-w-7xl mx-auto px-6">
     <h2 class="text-4xl font-bold text-center text-gray-800 mb-12 animate-fade-in-up">
@@ -463,31 +453,27 @@
         `;
       });
   });
-  </script> -->
+  </script>
   
  
     
 
-<!-- Reviews Section -->
-<section id="reviews" class="bg-white py-20">
-  <div class="max-w-7xl mx-auto px-6 text-center">
-    <h2 class="text-4xl font-bold text-gray-800 mb-4 georgia-italic">
-      What Our Clients Say
-    </h2>
-    <p class="text-gray-600 mb-10 text-lg">
-      Hear from students and professionals we've helped on their academic journey.
-    </p>
+      <!-- Reviews Section -->
+      <section id="reviews" class="bg-white py-20">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+          <h2 class="text-4xl font-bold text-gray-800 mb-4 animate-fade-in-up georgia-italic">
+            What Our Clients Say
+          </h2>
+          <p class="text-gray-600 mb-10 text-lg animate-fade-in-up delay-200">
+            Hear from students and professionals we've helped on their academic journey.
+          </p>
 
-    <!-- ✨ NEW: overflow wrapper ✨ -->
-    <div class="overflow-hidden">
-      <div
-        id="reviewsContainer"
-        class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-      >
-        <!-- JS will inject cards here -->
-      </div>
-    </div>
-
+          <!-- THIS is now dynamic -->
+          <div id="reviewsContainer" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in-up delay-300">
+            <!-- JS will inject cards here -->
+          </div>
+        </div>
+      </section>
 
 
     <!-- Beautiful Centered Leave a Review Button -->
