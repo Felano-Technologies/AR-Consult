@@ -106,33 +106,40 @@
           100% { transform: translateX(-100%); }
         }
       
-        #reviewsContainer {
-          /* keep your grid layout, then animate it */
-          animation: slideReviews 10s linear infinite;
-          will-change: transform;
-        }
+  /* — Desktop only: grid layout + slow marquee — */
+  @media (min-width: 768px) {
+    #reviewsContainer {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 2rem;                  /* adjust as you like */
+      animation: slideReviews 40s linear infinite;
+      overflow: visible;          /* let it fill normally */
+    }
+  }
 
-        @media (max-width: 768px) {
-          /* keep the marquee going */
-          #reviewsContainer {
-            display: flex !important;
-            flex-wrap: nowrap;
-            animation: scrollMobile 30s linear infinite !important;
-          }
-        
-          /* each card narrower (so ~1½ fit), and taller */
-          .review-card {
-            flex: 0 0 60%;        /* base width now 60% of viewport */
-            margin-right: 1rem;
-            min-height: 250px;    /* bump this up as needed */
-          }
-        }
-        
-        /* keyframes stay the same */
-        @keyframes scrollMobile {
-          from { transform: translateX(0); }
-          to   { transform: translateX(-50%); }
-        }
+  /* — Mobile only: single‐row flex + continuous scroll — */
+  @media (max-width: 767px) {
+    #reviewsContainer {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: hidden;
+      animation: scrollMobile 30s linear infinite;
+    }
+    .review-card {
+      flex: 0 0 60%;      /* ~1.6 cards in viewport */
+      margin-right: 1rem;
+      min-height: 250px;  /* taller boxes */
+    }
+  }
+
+  @keyframes slideReviews {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes scrollMobile {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
     </style>
   </head>
   <!-- Firebase SDK (add in <head>) -->
