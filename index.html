@@ -112,24 +112,27 @@
           will-change: transform;
         }
 
-        /* — MOBILE OVERRIDE: continuous marquee — */
-@media (max-width: 768px) {
-  .reviews-wrapper {
-    overflow: hidden;
-  }
-  #reviewsContainer {
-    display: flex !important;
-    animation: scrollMobile 30s linear infinite !important;
-  }
-  @keyframes scrollMobile {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
-  .review-card {
-    flex: 0 0 auto;
-    margin-right: 1rem;
-  }
-}
+        @media (max-width: 768px) {
+          /* keep the marquee going */
+          #reviewsContainer {
+            display: flex !important;
+            flex-wrap: nowrap;
+            animation: scrollMobile 30s linear infinite !important;
+          }
+        
+          /* each card narrower (so ~1½ fit), and taller */
+          .review-card {
+            flex: 0 0 60%;        /* base width now 60% of viewport */
+            margin-right: 1rem;
+            min-height: 250px;    /* bump this up as needed */
+          }
+        }
+        
+        /* keyframes stay the same */
+        @keyframes scrollMobile {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
+        }
     </style>
   </head>
   <!-- Firebase SDK (add in <head>) -->
