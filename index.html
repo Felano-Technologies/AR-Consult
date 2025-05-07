@@ -804,7 +804,7 @@
 
     db.collection('reviews')
       .orderBy('timestamp', 'desc')
-      .limit(6) // show up to 6
+      .limit(3) // show up to 6
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {
