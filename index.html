@@ -101,6 +101,16 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #166534;
         }
+        @keyframes slideReviews {
+          0%   { transform: translateX(100%); }
+          100% { transform: translateX(-100%); }
+        }
+      
+        #reviewsContainer {
+          /* keep your grid layout, then animate it */
+          animation: slideReviews 40s linear infinite;
+          will-change: transform;
+        }
     </style>
   </head>
   <!-- Firebase SDK (add in <head>) -->
@@ -372,7 +382,7 @@
   
   
 
-<!-- Latest News Section -->
+<!-- Latest News Section
 <section id="news" class="bg-gray-100 py-20">
   <div class="max-w-7xl mx-auto px-6">
     <h2 class="text-4xl font-bold text-center text-gray-800 mb-12 animate-fade-in-up">
@@ -381,7 +391,6 @@
 
     <div id="newsContainer" class="grid md:grid-cols-3 gap-10 animate-fade-in-up delay-200"></div>
 
-    <!-- centered link, two “spaces” below the cards -->
     <div class="mt-8 flex justify-center animate-fade-in-up delay-300">
       <a
         href="news.html"
@@ -393,70 +402,92 @@
   </div>
 </section>
 
-
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const container = document.getElementById('newsContainer');
-
-      fetch('news.html')
-        .then(res => {
-          if (!res.ok) throw new Error('Network response was not OK');
-          return res.text();
-        })
-        .then(htmlString => {
-          const doc = new DOMParser().parseFromString(htmlString, 'text/html');
-          // grab only the first 3 <section id="..."> blocks
-          const articles = Array.from(doc.querySelectorAll('section[id]')).slice(0, 3);
-
-          articles.forEach(sec => {
-            const id    = sec.id;
-            const date  = sec.querySelector('p.text-green-600')?.textContent.trim() || '';
-            const title = sec.querySelector('h1')?.textContent.trim()           || '';
-            const link  = `news.html#${id}`;
-
-            // build and append the card
-            const card = document.createElement('div');
-            card.className = 'bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden';
-            card.innerHTML = `
-              <div class="p-6 space-y-4">
-                <p class="text-green-600 text-sm font-semibold">${date}</p>
-                <h3 class="text-xl font-bold text-gray-800">${title}</h3>
-                <a href="${link}" class="text-green-600 font-semibold hover:underline">
-                  Read more →
-                </a>
-              </div>
-            `;
-            container.appendChild(card);
-          });
-        })
-        .catch(err => {
-          console.error('Failed to load news:', err);
-          container.innerHTML = `
-            <div class="col-span-3 text-center text-gray-500">
-              Unable to load news.
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('newsContainer');
+  
+    fetch('news.html')
+      .then(res => {
+        if (!res.ok) throw new Error('Network response was not OK');
+        return res.text();
+      })
+      .then(htmlString => {
+        const doc = new DOMParser().parseFromString(htmlString, 'text/html');
+        // grab all <section id="..."> blocks
+        const articles = Array.from(doc.querySelectorAll('section[id]'));
+  
+        // sort by date descending (newest first)
+        articles.sort((a, b) => {
+          const dateA = new Date(a.querySelector('p.text-green-600')?.textContent.trim() || '');
+          const dateB = new Date(b.querySelector('p.text-green-600')?.textContent.trim() || '');
+          return dateB - dateA;
+        });
+  
+        // take only the first 3 after sorting
+        articles.slice(0, 3).forEach(sec => {
+          const id    = sec.id;
+          const date  = sec.querySelector('p.text-green-600')?.textContent.trim() || '';
+          const title = sec.querySelector('h1')?.textContent.trim()           || '';
+          const link  = `news.html#${id}`;
+  
+          // pull the first <img> inside the section
+          const imgEl  = sec.querySelector('img');
+          const imgSrc = imgEl ? imgEl.getAttribute('src') : '';
+          const imgAlt = imgEl ? (imgEl.getAttribute('alt') || title) : '';
+  
+          // build and append the card
+          const card = document.createElement('div');
+          card.className = 'bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden';
+          card.innerHTML = `
+            ${imgSrc
+              ? `<img src="${imgSrc}" alt="${imgAlt}" class="w-full h-48 object-cover">`
+              : ''
+            }
+            <div class="p-6 space-y-4">
+              <p class="text-green-600 text-sm font-semibold">${date}</p>
+              <h3 class="text-xl font-bold text-gray-800">${title}</h3>
+              <a href="${link}" class="text-green-600 font-semibold hover:underline">
+                Read more →
+              </a>
             </div>
           `;
+          container.appendChild(card);
         });
-    });
-    </script>    
+      })
+      .catch(err => {
+        console.error('Failed to load news:', err);
+        container.innerHTML = `
+          <div class="col-span-3 text-center text-gray-500">
+            Unable to load news.
+          </div>
+        `;
+      });
+  });
+  </script> -->
+  
+ 
     
 
-      <!-- Reviews Section -->
-      <section id="reviews" class="bg-white py-20">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-          <h2 class="text-4xl font-bold text-gray-800 mb-4 animate-fade-in-up georgia-italic">
-            What Our Clients Say
-          </h2>
-          <p class="text-gray-600 mb-10 text-lg animate-fade-in-up delay-200">
-            Hear from students and professionals we've helped on their academic journey.
-          </p>
+<!-- Reviews Section -->
+<section id="reviews" class="bg-white py-20">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <h2 class="text-4xl font-bold text-gray-800 mb-4 georgia-italic">
+      What Our Clients Say
+    </h2>
+    <p class="text-gray-600 mb-10 text-lg">
+      Hear from students and professionals we've helped on their academic journey.
+    </p>
 
-          <!-- THIS is now dynamic -->
-          <div id="reviewsContainer" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in-up delay-300">
-            <!-- JS will inject cards here -->
-          </div>
-        </div>
-      </section>
+    <!-- ✨ NEW: overflow wrapper ✨ -->
+    <div class="overflow-hidden">
+      <div
+        id="reviewsContainer"
+        class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+      >
+        <!-- JS will inject cards here -->
+      </div>
+    </div>
+
 
 
     <!-- Beautiful Centered Leave a Review Button -->
@@ -526,14 +557,14 @@
                   <div class="bg-white p-6 rounded-xl shadow text-gray-700 space-y-4">
                       <div>
                           <h4 class="font-semibold text-lg mb-1">Email</h4>
-                          <a href="mailto:scholar.arconsult1@gmail.com?subject=Inquiry%20from%20AR%20Consult%20Website" 
+                          <a href="mailto:scholar@arconsultservices.com?subject=Inquiry%20from%20AR%20Consult%20Website" 
                               class="group flex items-center text-black-400 hover:underline transition relative">
                               <span class="mr-2 inline-block wiggle-on-hover">
                                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current" viewBox="0 0 24 24">
                                       <path d="M4 4h16c1.1 0 2 .9 2 2v1l-10 6L2 7V6c0-1.1.9-2 2-2zm0 4.25l8 4.75 8-4.75V18c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V8.25z"/>
                                   </svg>
                               </span>
-                              scholar.arconsult1@gmail.com
+                              scholar@arconsultservices.com
                           </a>
                       </div>
   
@@ -668,8 +699,8 @@
             <div>
               <h4 class="font-semibold text-lg mb-1">Email</h4>
               <p>
-                <a href="mailto:scholar.arconsult1@gmail.com" class="text-green-400 hover:underline transition">
-                  scholar.arconsult1@gmail.com
+                <a href="mailto:scholar@arconsultservices.com" class="text-green-400 hover:underline transition">
+                  scholar@arconsultservices.com
                 </a>
               </p>
             </div>
