@@ -164,13 +164,22 @@
     </nav>
     
   
-    <!-- Hero Section (with background image) -->
+    <!-- Hero Section (with seamless cross-fade carousel) -->
     <section id="hero" class="relative h-screen overflow-hidden">
-        <!-- Carousel -->
-        <div id="carousel" class="absolute inset-0 z-0 transition-all duration-[2000ms] ease-in-out bg-cover bg-center"></div>
-      
-        <!-- Overlay -->
-        <div class="absolute inset-0 bg-black bg-opacity-60 z-10"></div>
+      <div id="carousel" class="absolute inset-0 z-0">
+        <!-- Two overlaid slides -->
+        <div
+          id="slideA"
+          class="absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out opacity-100"
+        ></div>
+        <div
+          id="slideB"
+          class="absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out opacity-0"
+        ></div>
+      </div>
+
+      <!-- Overlay -->
+      <div class="absolute inset-0 bg-black bg-opacity-60 z-10"></div>
       
         <!-- Content -->
         <div class="relative z-20 flex flex-col items-center justify-center text-white h-full px-4 text-center">
@@ -741,20 +750,37 @@
     const nav = document.getElementById("navbar");
     const carousel = document.getElementById("carousel");
     const images = [
-        "./images/1.jpg",
-        "./images/4.jpg",
-        "./images/5.jpg",
-        "./images/7.jpg"
-    ];
-    let index = 0;
+    "./images/1.jpg",
+    "./images/4.jpg",
+    "./images/5.jpg",
+    "./images/7.jpg",
+  ];
+  // Preload
+  images.forEach((src) => new Image().src = src);
+
+  const slideA = document.getElementById("slideA"),
+    slideB = document.getElementById("slideB");
+  let current = 0,
+    showingA = true;
+
+  // initial
+  slideA.style.backgroundImage = `url('${images[0]}')`;
 
   function switchImage() {
-    carousel.style.backgroundImage = `url('${images[index]}')`;
-    index = (index + 1) % images.length;
+    const next = (current + 1) % images.length;
+    const fadeIn = showingA ? slideB : slideA;
+    const fadeOut = showingA ? slideA : slideB;
+    // prepare
+    fadeIn.style.backgroundImage = `url('${images[next]}')`;
+    // cross-fade
+    fadeIn.style.opacity = "1";
+    fadeOut.style.opacity = "0";
+    // advance
+    current = next;
+    showingA = !showingA;
   }
 
-  // Initial image and auto-switch every 5 seconds
-  switchImage();
+  // rotate every 5s
   setInterval(switchImage, 5000);
 
     window.addEventListener("scroll", () => {
